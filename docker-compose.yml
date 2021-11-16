@@ -6,9 +6,9 @@ services:
 #mongo: mismo nombre usado en el run.sh de Order y application.properties.
 #Se resuelve en una dirección IP.
   mongo:
-    image: alfonsomp359/p2pgps:db
+    image: alfonsomp359/p2gps:db
     deploy:
-      replicas: 1 # para escabilidad del servicio.
+      replicas: 1 
       resources:
         limits:
           cpus: "0.15"
@@ -19,18 +19,17 @@ services:
       - "28017:28017"
       - "27017:27017"
     volumes:
-      - "db-data: /data/db" # para dar persistencia a la sesión
+      - "db-data:/data/db" # para dar persistencia a la sesión
   order:
     image: alfonsomp359/p2gps:order
-    depends on:
-#le pasamos al servicio order la IP del servicio mongo
+    depends_on:
       - "mongo"
     deploy:
-      replicas:
+      replicas: 1
       resources:
         limits:
           cpus: "0.3"
-          memory: 300M
+          memory: 500M
       restart_policy:
         condition: on-failure
     ports:
@@ -44,7 +43,7 @@ services:
           cpus: "0.25"
           memory: 300M
       restart_policy:
-        condigiton: on-failure
+        condition: on-failure
     ports:
       - "80:8080"
 
