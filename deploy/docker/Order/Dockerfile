@@ -8,7 +8,7 @@ RUN mkdir -p /usr/local/app
 
 # copiar el .jar del servicio a la imagen.
 #No se indica el nombre porque las versiones pueden cambiar
-COPY drop/*.jar urs/local/app/
+COPY drop/*.jar usr/local/app/
 
 #copiar script que se ejecutará al lanzar el contenedor
 COPY drop/run.sh usr/local/app/run.sh
