@@ -17,7 +17,7 @@ services:
         condition: none #reinicar el contenedor si falla
     ports:
     volumes:
-      - "db-data:/data/db" # para dar persistencia a la sesión
+      - "db-data:/var/logs" # para dar persistencia a la sesión
   order:
     image: alfonsomp359/p2gps:order
     depends_on:
@@ -45,3 +45,7 @@ services:
       - "8082"
 volumes:
    db-data:
+     driver: azure-file
+     driver_opts:
+       share_name: db-data
+       storage_Account_name: almacengps
